@@ -1,10 +1,20 @@
-import "./Home.css";
+import { useNavigate } from "react-router-dom";
+import BottomBar from "./components/BottomBar";
 
 function Home() {
+  const navigate = useNavigate()
+
   return (
-    <div className="container">
-      <h1>Welcome to Tauri! 2</h1>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+    <div>
+      <BottomBar />
+      <div className="w-screen h-screen flex flex-col justify-center items-center gap-10">
+        <p className="font-bold text-xl">What would you like to do?</p>
+        <div className="flex gap-6">
+          <button className="btn w-72 h-72" onClick={() => navigate("/hash/")}>To Hash</button>
+          <div className="divider divider-horizontal">OR</div>
+          <button className="btn w-72 h-72">To Image</button>
+        </div>
+      </div>
     </div>
   );
 }
