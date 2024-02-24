@@ -1,28 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Home from "./Home";
-import "./styles.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Hash from "./hash";
-import Img from "./img";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Home from './Home'
+import './styles.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Hash from './hash'
+import Img from './img'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Home />,
   },
   {
-    path: "/hash/",
+    path: '/hash/',
     element: <Hash />,
   },
   {
-    path: "/img/",
+    path: '/img/',
     element: <Img />,
   },
-]);
+])
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-);
+  </React.StrictMode>
+)
