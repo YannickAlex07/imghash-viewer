@@ -1,8 +1,26 @@
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+type Input = {
+  hash: string
+  width: string
+  height: string
+}
+
 function HashForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm<Input>({ mode: 'all' })
+
+  const onSubmit: SubmitHandler<Input> = (data) => {
+    console.log(data)
+  }
+
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
-      noValidate
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onSubmit={handleSubmit(onSubmit)}
       className="flex justify-center mt-6"
     >
       <div className="flex-col gap-y-3 form-control items-center">
@@ -10,11 +28,36 @@ function HashForm() {
         <div className="form-control w-full">
           <div className="label">
             <span className="label-text">Hex-Encoded Hash</span>
+            {errors.hash && (
+              <div
+                className="tooltip tooltip-top"
+                data-tip="This field is required."
+              >
+                <span className="label-text">
+                  <svg
+                    className="w-5 h-5 text-error"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 13V8m0 8h0m9-4a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            )}
           </div>
           <input
             type="text"
             className="input input-bordered w-full"
             placeholder="Hash"
+            {...register('hash', { required: true })}
           />
         </div>
 
@@ -23,24 +66,82 @@ function HashForm() {
           <div className="form-control w-full">
             <div className="label">
               <span className="label-text">Width</span>
+              {errors.width && (
+                <div
+                  className="tooltip tooltip-top"
+                  data-tip="This field is required, cannot be longer than 6 characters, and must be a number."
+                >
+                  <span className="label-text">
+                    <svg
+                      className="w-5 h-5 text-error"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 13V8m0 8h0m9-4a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              )}
             </div>
             <input
               type="number"
               className="input input-bordered w-full"
               placeholder="X"
               defaultValue={8}
+              {...register('width', {
+                valueAsNumber: true,
+                required: true,
+                validate: (value) => parseInt(value) < 1_000_000,
+              })}
             />
           </div>
 
           <div className="form-control w-full">
             <div className="label">
               <span className="label-text">Height</span>
+              {errors.height && (
+                <div
+                  className="tooltip tooltip-top"
+                  data-tip="This field is required, cannot be longer than 6 characters, and must be a number."
+                >
+                  <span className="label-text">
+                    <svg
+                      className="w-5 h-5 text-error"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 13V8m0 8h0m9-4a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              )}
             </div>
             <input
               type="number"
               className="input input-bordered w-full"
               placeholder="Y"
               defaultValue={8}
+              {...register('height', {
+                valueAsNumber: true,
+                required: true,
+                maxLength: 6,
+              })}
             />
           </div>
 
@@ -58,9 +159,9 @@ function HashForm() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M9.5 10a2.5 2.5 0 1 1 5 .2 2.4 2.4 0 0 1-2.5 2.4V14m0 3h0m9-5a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
@@ -69,7 +170,11 @@ function HashForm() {
         </div>
 
         {/* Button */}
-        <button className="btn btn-primary w-full" disabled={true}>
+        <button
+          className="btn btn-primary w-full"
+          type="submit"
+          disabled={!isValid}
+        >
           Convert
         </button>
       </div>
