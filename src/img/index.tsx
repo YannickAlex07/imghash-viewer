@@ -1,41 +1,47 @@
-import { open } from '@tauri-apps/api/dialog'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
+import BottomBar from '../components/BottomBar'
+import Back from '../components/Back'
+import SelectImage from './components/SelectImage'
+import Spinner from '../components/Spinner'
 
-const Img: FunctionComponent = () => {
-  const openImagePicker = async () => {
-    const result = await open({
-      multiple: false,
-      directory: false,
-    })
-    console.log(result)
+enum State {
+  Default,
+  Loading,
+  Summary,
+}
+
+const ImagePage: FunctionComponent = () => {
+  const [state, setState] = useState(State.Default)
+
+  const onSelected = (path: string) => {
+    console.log(path)
+
+    // show loading spinner
+    setState(State.Loading)
+
+    // call rust backend to hash the image
+
+    // show the summary
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <div className="flex flex-col items-center space-y-2">
-        <div className="flex items-center flex-col">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              void (async () => {
-                await openImagePicker()
-              })()
-            }}
-          >
-            Select Image
-          </button>
-        </div>
-        <p>or</p>
-        <div>
-          <input
-            type="text"
-            placeholder="Enter Hash"
-            className="input input-bordered w-full max-w-xs"
-          />
+    <div>
+      <BottomBar />
+
+      {/* Header */}
+      <div className="absolute top-0 z-10">
+        <div className="flex justify-between items-center m-4">
+          <Back showConfirmation={false} />
         </div>
       </div>
+
+      {/* Select Image */}
+      {state === State.Default && <SelectImage onSelected={onSelected} />}
+
+      {/* Loading spinner */}
+      {state === State.Loading && <Spinner />}
     </div>
   )
 }
 
-export default Img
+export default ImagePage

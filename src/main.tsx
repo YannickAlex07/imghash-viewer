@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import Home from './Home'
 import './styles.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Hash from './hash'
-import Img from './img'
+import HashPage from './hash'
+import ImagePage from './img'
 
 const router = createBrowserRouter([
   {
@@ -13,11 +13,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/hash/',
-    element: <Hash />,
+    element: <HashPage />,
   },
   {
-    path: '/img/',
-    element: <Img />,
+    path: '/image/',
+    element: <ImagePage />,
   },
 ])
 

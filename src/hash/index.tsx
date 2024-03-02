@@ -13,7 +13,7 @@ enum State {
   Matrix,
 }
 
-const Hash: FunctionComponent = () => {
+const HashPage: FunctionComponent = () => {
   const [state, setState] = useState(State.Default)
   const [matrix, setMatrix] = useState<Matrix | null>(null)
 
@@ -71,4 +71,4 @@ const Hash: FunctionComponent = () => {
   )
 }
 
-export default Hash
+export default HashPage

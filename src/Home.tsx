@@ -15,7 +15,9 @@ const Home: FunctionComponent = () => {
             To Hash
           </button>
           <div className="divider divider-horizontal">OR</div>
-          <button className="btn w-72 h-72">To Image</button>
+          <button className="btn w-72 h-72" onClick={() => navigate('/image/')}>
+            To Image
+          </button>
         </div>
       </div>
     </div>
