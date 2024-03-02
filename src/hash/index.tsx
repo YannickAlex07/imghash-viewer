@@ -4,7 +4,7 @@ import BottomBar from '../components/BottomBar'
 import HashForm, { HashFormData } from './components/HashForm'
 import { invoke } from '@tauri-apps/api'
 import { Matrix } from '../models/matrix'
-import Spinner from './components/Spinner'
+import Spinner from '../components/Spinner'
 import MatrixView from './components/MatrixView'
 
 enum State {
@@ -53,10 +53,7 @@ const Hash: FunctionComponent = () => {
       {/* Header */}
       <div className="absolute top-0 z-10">
         <div className="flex justify-between items-center m-4">
-          <Back />
-          <button className="btn hidden" disabled={true}>
-            Clear
-          </button>
+          <Back showConfirmation={matrix !== null} />
         </div>
       </div>
 

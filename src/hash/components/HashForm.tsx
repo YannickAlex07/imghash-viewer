@@ -187,7 +187,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
 
             {/* Button */}
             <button
-              className="btn btn-primary w-full"
+              className="btn btn-primary text-white w-full"
               type="submit"
               disabled={!isValid}
             >
