@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 
-function BottomBar() {
+const BottomBar: FunctionComponent = () => {
   const LIGHT_THEME = 'cmyk'
   const DARK_THEME = 'sunset'
 

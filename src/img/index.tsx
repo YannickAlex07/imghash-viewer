@@ -1,6 +1,7 @@
 import { open } from '@tauri-apps/api/dialog'
+import { FunctionComponent } from 'react'
 
-function Img() {
+const Img: FunctionComponent = () => {
   const openImagePicker = async () => {
     const result = await open({
       multiple: false,

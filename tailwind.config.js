@@ -12,14 +12,14 @@ export default {
     themes: [
       'cmyk',
       {
-        sunset: {
-          ...themes['sunset'],
+        business: {
+          ...themes['business'],
           primary: '#45aeee',
           '--rounded-box': '1rem',
           '--rounded-btn': '0.5rem',
         },
       },
     ],
-    darkTheme: 'sunset',
+    darkTheme: 'business',
   },
 }

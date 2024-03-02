@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import BottomBar from './components/BottomBar'
+import { FunctionComponent } from 'react'
 
-function Home() {
+const Home: FunctionComponent = () => {
   const navigate = useNavigate()
 
   return (

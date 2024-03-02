@@ -1,6 +1,7 @@
+import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Back() {
+const Back: FunctionComponent = () => {
   const navigate = useNavigate()
 
   return (
