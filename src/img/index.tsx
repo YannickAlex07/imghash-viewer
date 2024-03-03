@@ -1,8 +1,11 @@
+import { invoke } from '@tauri-apps/api'
 import { FunctionComponent, useState } from 'react'
-import BottomBar from '../components/BottomBar'
 import Back from '../components/Back'
-import SelectImage from './components/SelectImage'
+import BottomBar from '../components/BottomBar'
 import Spinner from '../components/Spinner'
+import SelectImage from './components/SelectImage'
+import { ImageSummary } from '../models/summary'
+import ImageSummaryView from './components/ImageSummaryView'
 
 enum State {
   Default,
@@ -12,6 +15,7 @@ enum State {
 
 const ImagePage: FunctionComponent = () => {
   const [state, setState] = useState(State.Default)
+  const [summary, setSummary] = useState<ImageSummary | null>(null)
 
   const onSelected = (path: string) => {
     console.log(path)
@@ -20,6 +24,21 @@ const ImagePage: FunctionComponent = () => {
     setState(State.Loading)
 
     // call rust backend to hash the image
+    invoke('hash_image', {
+      path: path,
+    })
+      .then((response) => {
+        // validate the summary
+        const summary: ImageSummary = ImageSummary.parse(response)
+
+        setSummary(summary)
+        setState(State.Summary)
+      })
+      .catch((error) => {
+        console.log(error)
+        // show error toast
+        setState(State.Default)
+      })
 
     // show the summary
   }
@@ -40,6 +59,9 @@ const ImagePage: FunctionComponent = () => {
 
       {/* Loading spinner */}
       {state === State.Loading && <Spinner />}
+
+      {/* Summary */}
+      {state === State.Summary && <ImageSummaryView summary={summary!} />}
     </div>
   )
 }

@@ -1,33 +1,20 @@
 import { FunctionComponent } from 'react'
 import { Matrix } from '../../models/matrix'
+import MatrixView from '../../components/MatrixView'
 
-export type MatrixViewProps = {
+export type MatrixViewContainerProps = {
   matrix: Matrix
   onClear: () => void
 }
 
-const MatrixView: FunctionComponent<MatrixViewProps> = ({
+const MatrixViewContainer: FunctionComponent<MatrixViewContainerProps> = ({
   matrix,
   onClear,
 }) => {
-  const matrixRows = []
-  for (const row of matrix) {
-    const els = []
-
-    for (const el of row) {
-      const color = el ? 'bg-primary' : 'bg-base-200'
-      els.push(<div className={`w-10 h-10 ${color}`}></div>)
-    }
-
-    matrixRows.push(<div className="flex gap-2">{els}</div>)
-  }
-
   return (
     <div className="h-screen w-screen flex items-center justify-center">
       <div className="flex flex-col gap-6 items-center">
-        <div className="flex flex-col gap-2 rounded-xl overflow-hidden">
-          {matrixRows}
-        </div>
+        <MatrixView matrix={matrix} />
         <div>
           <button className="btn" onClick={onClear}>
             <svg
@@ -53,4 +40,4 @@ const MatrixView: FunctionComponent<MatrixViewProps> = ({
   )
 }
 
-export default MatrixView
+export default MatrixViewContainer

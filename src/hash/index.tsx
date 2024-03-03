@@ -5,7 +5,7 @@ import HashForm, { HashFormData } from './components/HashForm'
 import { invoke } from '@tauri-apps/api'
 import { Matrix } from '../models/matrix'
 import Spinner from '../components/Spinner'
-import MatrixView from './components/MatrixView'
+import MatrixViewContainer from './components/MatrixViewContainer'
 
 enum State {
   Default,
@@ -65,7 +65,7 @@ const HashPage: FunctionComponent = () => {
 
       {/* Matrix */}
       {state === State.Matrix && (
-        <MatrixView matrix={matrix!} onClear={onClear} />
+        <MatrixViewContainer matrix={matrix!} onClear={onClear} />
       )}
     </div>
   )
