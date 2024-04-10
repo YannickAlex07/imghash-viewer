@@ -80,7 +80,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
                   {errors.width && (
                     <div
                       className="tooltip tooltip-top"
-                      data-tip="This field is required, cannot be longer than 6 characters, and must be a number."
+                      data-tip="This field is required, must be > 0, cannot be longer than 6 characters, and must be a number."
                     >
                       <span className="label-text">
                         <svg
@@ -111,6 +111,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
                     valueAsNumber: true,
                     required: true,
                     validate: (value) => parseInt(value) < 1_000_000,
+                    min: 1,
                   })}
                 />
               </div>
@@ -121,7 +122,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
                   {errors.height && (
                     <div
                       className="tooltip tooltip-top"
-                      data-tip="This field is required, cannot be longer than 6 characters, and must be a number."
+                      data-tip="This field is required, must be > 0, cannot be longer than 6 characters, and must be a number."
                     >
                       <span className="label-text">
                         <svg
@@ -152,6 +153,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
                     valueAsNumber: true,
                     required: true,
                     maxLength: 6,
+                    min: 1,
                   })}
                 />
               </div>
