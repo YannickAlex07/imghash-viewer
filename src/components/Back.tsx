@@ -30,6 +30,7 @@ const Back: FunctionComponent<BackProps> = ({ showConfirmation }) => {
 
   return (
     <div>
+      {/* Back Button */}
       <button className="btn" onClick={onClick}>
         <svg
           className="w-6 h-6"
@@ -48,20 +49,15 @@ const Back: FunctionComponent<BackProps> = ({ showConfirmation }) => {
         </svg>
         Back
       </button>
+
+      {/* Modal */}
       <dialog id="confirmDialog" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">
-            Are you sure you want to go back?
-          </h3>
-          <p className="pt-4">
-            If you go back, the current state will be discarded.
-          </p>
+          <h3 className="font-bold text-lg">Are you sure you want to go back?</h3>
+          <p className="pt-4">If you go back, the current state will be discarded.</p>
           <div className="modal-action">
             <form method="dialog">
-              <button
-                className="btn btn-primary text-white mr-2"
-                onClick={() => navigate('/')}
-              >
+              <button className="btn btn-primary text-white mr-2" onClick={() => navigate('/')}>
                 Confirm
               </button>
 

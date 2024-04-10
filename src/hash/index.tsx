@@ -1,49 +1,50 @@
+import { invoke } from '@tauri-apps/api'
 import { FunctionComponent, useState } from 'react'
 import Back from '../components/Back'
 import BottomBar from '../components/BottomBar'
-import HashForm, { HashFormData } from './components/HashForm'
-import { invoke } from '@tauri-apps/api'
-import { Matrix } from '../models/matrix'
 import Spinner from '../components/Spinner'
-import MatrixViewContainer from './components/MatrixViewContainer'
+import SelectImage from './components/SelectImage'
+import { ImageSummary } from '../models/summary'
+import ImageSummaryView from './components/ImageSummaryView'
 
 enum State {
   Default,
   Loading,
-  Matrix,
+  Summary,
 }
 
 const HashPage: FunctionComponent = () => {
   const [state, setState] = useState(State.Default)
-  const [matrix, setMatrix] = useState<Matrix | null>(null)
+  const [summary, setSummary] = useState<ImageSummary | null>(null)
 
-  const onSubmit = (data: HashFormData) => {
+  const onSelected = (path: string) => {
+    console.log(path)
+
     // show loading spinner
     setState(State.Loading)
 
-    invoke('decode_hash', {
-      hash: data.hash,
-      width: data.width,
-      height: data.height,
+    // call rust backend to hash the image
+    invoke('hash_image', {
+      path: path,
     })
       .then((response) => {
-        // use zod to validate the response
-        const matrix: Matrix = Matrix.parse(response)
+        // validate the summary
+        console.log(response)
+        const summary: ImageSummary = ImageSummary.parse(response)
 
-        // hide loading spinner and show matrix
-        setMatrix(matrix)
-        setState(State.Matrix)
+        setSummary(summary)
+        setState(State.Summary)
       })
       .catch((error) => {
         console.log(error)
-        // hide loading spinner, show error toast and
-        // show form again
+        // show error toast
+        setState(State.Default)
       })
   }
 
   const onClear = () => {
     setState(State.Default)
-    setMatrix(null)
+    setSummary(null)
   }
 
   return (
@@ -53,20 +54,18 @@ const HashPage: FunctionComponent = () => {
       {/* Header */}
       <div className="absolute top-0 z-10">
         <div className="flex justify-between items-center m-4">
-          <Back showConfirmation={matrix !== null} />
+          <Back showConfirmation={summary !== null} />
         </div>
       </div>
 
-      {/* Form */}
-      {state === State.Default && <HashForm onSubmit={onSubmit} />}
+      {/* Select Image */}
+      {state === State.Default && <SelectImage onSelected={onSelected} />}
 
       {/* Loading spinner */}
       {state === State.Loading && <Spinner />}
 
-      {/* Matrix */}
-      {state === State.Matrix && (
-        <MatrixViewContainer matrix={matrix!} onClear={onClear} />
-      )}
+      {/* Summary */}
+      {state === State.Summary && <ImageSummaryView onClear={onClear} summary={summary!} />}
     </div>
   )
 }

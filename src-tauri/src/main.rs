@@ -11,9 +11,9 @@ mod summary;
 
 #[tauri::command]
 async fn decode_hash(hash: &str, width: usize, height: usize) -> Result<Vec<Vec<bool>>, String> {
-    let img_hash = ImageHash::python_safe_decode(hash, width, height);
+    let img_hash = ImageHash::decode(hash, width, height);
     
-    if img_hash.is_none() {
+    if img_hash.is_err() {
         return Err("Failed to decode hash".to_string());
     }
 

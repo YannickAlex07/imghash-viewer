@@ -4,7 +4,7 @@ use std::path::Path;
 use imghash::{average::AverageHasher, difference::DifferenceHasher, perceptual::PerceptualHasher, ImageHasher};
 use serde::Serialize;
 
-// HASH SUMMARYØ
+// HASH SUMMARY
 #[derive(Debug, Serialize)]
 pub struct HashSummary {
     pub matrix: Vec<Vec<bool>>,
@@ -18,7 +18,7 @@ impl HashSummary {
         match res {
             Ok(hash) => Ok(HashSummary {
                 matrix: hash.matrix.clone(),
-                hash: hash.python_safe_encode(),
+                hash: hash.encode(),
             }),
             Err(e) => Err(e.to_string())
         }

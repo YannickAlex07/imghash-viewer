@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import TitleHeader from '../../components/TitleHeader'
 
 export type HashFormData = {
   hash: string
@@ -26,13 +27,10 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
     <div>
       <div className="h-screen flex flex-col justify-center items-center">
         {/* Text */}
-        <div className="flex flex-col items-center gap-y-2">
-          <h1 className="text-4xl font-extrabold">Hash Converter</h1>
-          <p className="text-center max-w-md">
-            Converts a hash to its corresponding bit matrix and visualizes it in
-            black and white.
-          </p>
-        </div>
+        <TitleHeader
+          title="Decode Image Hash"
+          description="Converts any hash to its corresponding bit matrix and visualizes it."
+        />
 
         <form
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -45,10 +43,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
               <div className="label">
                 <span className="label-text">Hex-Encoded Hash</span>
                 {errors.hash && (
-                  <div
-                    className="tooltip tooltip-top"
-                    data-tip="This field is required."
-                  >
+                  <div className="tooltip tooltip-top" data-tip="This field is required.">
                     <span className="label-text">
                       <svg
                         className="w-5 h-5 text-error"
@@ -186,11 +181,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
             </div>
 
             {/* Button */}
-            <button
-              className="btn btn-primary text-white w-full"
-              type="submit"
-              disabled={!isValid}
-            >
+            <button className="btn btn-primary text-white w-full" type="submit" disabled={!isValid}>
               Convert
             </button>
           </div>

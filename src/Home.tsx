@@ -1,23 +1,32 @@
-import { useNavigate } from 'react-router-dom'
-import BottomBar from './components/BottomBar'
 import { FunctionComponent } from 'react'
+import BottomBar from './components/BottomBar'
+import HomeSelectButton from './components/HomeSelectButton'
+import TitleHeader from './components/TitleHeader'
 
 const Home: FunctionComponent = () => {
-  const navigate = useNavigate()
-
   return (
     <div>
       <BottomBar />
       <div className="w-screen h-screen flex flex-col justify-center items-center gap-10">
-        <p className="font-bold text-xl">What would you like to do?</p>
+        {/* Text */}
+        <TitleHeader
+          title="Image Hash Viewer"
+          description="Please select what you would like to do."
+        />
+
+        {/* Buttons */}
         <div className="flex gap-6">
-          <button className="btn w-72 h-72" onClick={() => navigate('/hash/')}>
-            To Hash
-          </button>
+          <HomeSelectButton
+            destination="/decode/"
+            title="Decode Hash"
+            description="Decode a hash to its original bit matrix."
+          />
           <div className="divider divider-horizontal">OR</div>
-          <button className="btn w-72 h-72" onClick={() => navigate('/image/')}>
-            To Image
-          </button>
+          <HomeSelectButton
+            destination="/hash/"
+            title="Hash Image"
+            description="Generate hashes for a selected image."
+          />
         </div>
       </div>
     </div>

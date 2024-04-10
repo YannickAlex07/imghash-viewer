@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import Home from './Home'
 import './styles.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import DecodePage from './decode'
 import HashPage from './hash'
-import ImagePage from './img'
 
 const router = createBrowserRouter([
   {
@@ -12,12 +12,12 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: '/hash/',
-    element: <HashPage />,
+    path: '/decode/',
+    element: <DecodePage />,
   },
   {
-    path: '/image/',
-    element: <ImagePage />,
+    path: '/hash/',
+    element: <HashPage />,
   },
 ])
 
