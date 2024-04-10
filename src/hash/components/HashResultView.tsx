@@ -1,15 +1,16 @@
 import { FunctionComponent } from 'react'
-import { ImageSummary } from '../../models/summary'
-import HashSummaryView from './HashSummaryView'
+import { HashResult } from '../../models/hash_result'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
+import HashView from './HashView'
+import { HashTypeToName } from '../../models/hash_type'
 
-export type ImageSummaryViewProps = {
-  summary: ImageSummary
+export type HashResultViewProps = {
+  result: HashResult
   onClear: () => void
 }
 
-const ImageSummaryView: FunctionComponent<ImageSummaryViewProps> = ({ summary, onClear }) => {
-  const imgUrl = convertFileSrc(summary.path)
+const HashResultView: FunctionComponent<HashResultViewProps> = ({ result, onClear }) => {
+  const imgUrl = convertFileSrc(result.path)
 
   return (
     <div className="h-screen w-screen flex flex-col gap-10 items-center justify-center">
@@ -20,10 +21,12 @@ const ImageSummaryView: FunctionComponent<ImageSummaryViewProps> = ({ summary, o
         </div>
 
         {/* Hashes */}
-        <div className="flex flex-col gap-4">
-          <HashSummaryView title="Average Hash" summary={summary.ahash} />
-          <HashSummaryView title="Difference Hash" summary={summary.dhash} />
-          <HashSummaryView title="Perceptual hash" summary={summary.phash} />
+        <div className="flex flex-col gap-5">
+          {result.hashes
+            .sort((a, b) => a.hashType.valueOf() - b.hashType.valueOf()) // ensure that the order is always the same
+            .map((hash) => (
+              <HashView title={HashTypeToName[hash.hashType]} hash={hash} />
+            ))}
         </div>
       </div>
 
@@ -50,4 +53,4 @@ const ImageSummaryView: FunctionComponent<ImageSummaryViewProps> = ({ summary, o
   )
 }
 
-export default ImageSummaryView
+export default HashResultView

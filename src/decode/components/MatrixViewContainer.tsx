@@ -7,10 +7,7 @@ export type MatrixViewContainerProps = {
   onClear: () => void
 }
 
-const MatrixViewContainer: FunctionComponent<MatrixViewContainerProps> = ({
-  matrix,
-  onClear,
-}) => {
+const MatrixViewContainer: FunctionComponent<MatrixViewContainerProps> = ({ matrix, onClear }) => {
   return (
     <div className="h-screen w-screen flex items-center justify-center">
       <div className="flex flex-col gap-6 items-center">

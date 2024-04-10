@@ -1340,8 +1340,10 @@ name = "imghash-viewer"
 version = "0.0.0"
 dependencies = [
  "imghash",
+ "rayon",
  "serde",
  "serde_json",
+ "serde_repr",
  "tauri",
  "tauri-build",
 ]

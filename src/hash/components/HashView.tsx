@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react'
-import { HashSummary } from '../../models/summary'
+import { Hash } from '../../models/hash_result'
 import MatrixView from '../../components/MatrixView'
 
-export type HashSummaryViewProps = {
+export type HashViewProps = {
   title: string
-  summary: HashSummary
+  hash: Hash
 }
 
-const HashSummaryView: FunctionComponent<HashSummaryViewProps> = ({ title, summary }) => {
+const HashView: FunctionComponent<HashViewProps> = ({ title, hash }) => {
   const dialogId = `matrixDialog-${title.replace(' ', '')}`
 
   const showMatrix = () => {
@@ -26,7 +26,7 @@ const HashSummaryView: FunctionComponent<HashSummaryViewProps> = ({ title, summa
       <div className="flex gap-5 items-center bg-base-200 py-3 px-8 rounded-xl">
         <div className="flex flex-col gap-1 w-56">
           <p className="text-base">{title}</p>
-          <p className="font-bold">{summary.hash.toUpperCase()}</p>
+          <p className="font-bold">{hash.hash.toUpperCase()}</p>
         </div>
         <button className="btn btn-primary text-white" onClick={showMatrix}>
           Open Matrix
@@ -40,9 +40,9 @@ const HashSummaryView: FunctionComponent<HashSummaryViewProps> = ({ title, summa
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center gap-2">
                 <p className="text-lg">{title}</p>
-                <p className="text-xl font-bold">{summary.hash.toUpperCase()}</p>
+                <p className="text-xl font-bold">{hash.hash.toUpperCase()}</p>
               </div>
-              <MatrixView matrix={summary.matrix} />
+              <MatrixView matrix={hash.matrix} />
             </div>
           </div>
 
@@ -58,4 +58,4 @@ const HashSummaryView: FunctionComponent<HashSummaryViewProps> = ({ title, summa
   )
 }
 
-export default HashSummaryView
+export default HashView

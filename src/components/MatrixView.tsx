@@ -37,11 +37,7 @@ const MatrixView: FunctionComponent<MatrixViewProps> = ({
     matrixRows.push(<div className={`flex ${gap}`}>{els}</div>)
   }
 
-  return (
-    <div className={`flex flex-col ${gap} ${rounded} overflow-hidden`}>
-      {matrixRows}
-    </div>
-  )
+  return <div className={`flex flex-col ${gap} ${rounded} overflow-hidden`}>{matrixRows}</div>
 }
 
 export default MatrixView

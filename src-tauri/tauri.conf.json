@@ -39,7 +39,9 @@
         "resizable": true,
         "title": "Image Hash Viewer",
         "width": 1300,
-        "height": 850
+        "height": 850,
+        "minWidth": 1300,
+        "minHeight": 850
       }
     ],
     "security": {
@@ -48,7 +50,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.yannick.imagehashviewer",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",

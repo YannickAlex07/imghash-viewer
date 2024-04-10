@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import BottomBar from './components/BottomBar'
-import HomeSelectButton from './components/HomeSelectButton'
+import HomeSelectButton, { HomeButtonIcon } from './components/HomeSelectButton'
 import TitleHeader from './components/TitleHeader'
 
 const Home: FunctionComponent = () => {
@@ -20,12 +20,14 @@ const Home: FunctionComponent = () => {
             destination="/decode/"
             title="Decode Hash"
             description="Decode a hash to its original bit matrix."
+            icon={HomeButtonIcon.Brain}
           />
           <div className="divider divider-horizontal">OR</div>
           <HomeSelectButton
             destination="/hash/"
             title="Hash Image"
             description="Generate hashes for a selected image."
+            icon={HomeButtonIcon.File}
           />
         </div>
       </div>
