@@ -17,6 +17,7 @@ enum State {
 const HashPage: FunctionComponent = () => {
   const [state, setState] = useState(State.Default)
   const [result, setResult] = useState<HashResult | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const onSelected = (path: string, hashTypes: Set<HashType>) => {
     console.log(path)
@@ -38,9 +39,15 @@ const HashPage: FunctionComponent = () => {
         setState(State.Result)
       })
       .catch((error) => {
-        console.log(error)
-        // show error toast
+        setError(error as string)
         setState(State.Default)
+
+        const modal = document.getElementById('errorDialog')
+
+        if (modal) {
+          const dialog = modal as HTMLDialogElement
+          dialog.showModal()
+        }
       })
   }
 
@@ -68,6 +75,23 @@ const HashPage: FunctionComponent = () => {
 
       {/* Summary */}
       {state === State.Result && <HashResultView onClear={onClear} result={result!} />}
+
+      {/* Error Modal */}
+      <dialog id="errorDialog" className="modal">
+        <div className="modal-box">
+          <div className="flex flex-col gap-2">
+            <p className="text-xl font-extrabold">Something Went Wrong</p>
+            <p className="text-lg">{error}</p>
+          </div>
+
+          {/* Actions */}
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }

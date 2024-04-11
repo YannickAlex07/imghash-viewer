@@ -67,12 +67,12 @@ const SelectImage: FunctionComponent<SelectImageProps> = ({ onSelected }) => {
           {/* Checkbox */}
           <div className="flex gap-4 flex-wrap max-w-md justify-center">
             {AllHashTypes.map((type) => (
-              <div className="form-control">
+              <div key={type} className="form-control">
                 <div className="bg-base-200 px-6 py-2 rounded-xl">
                   <label className="label cursor-pointer">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary"
+                      className="checkbox checkbox-primary [--chkfg:white]"
                       onChange={() => {
                         if (checked.has(type)) {
                           checked.delete(type)

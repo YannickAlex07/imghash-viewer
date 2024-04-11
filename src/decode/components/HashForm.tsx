@@ -110,7 +110,7 @@ const HashForm: FunctionComponent<HashFormProps> = ({ onSubmit }) => {
                   {...register('width', {
                     valueAsNumber: true,
                     required: true,
-                    validate: (value) => parseInt(value) < 1_000_000,
+                    maxLength: 6,
                     min: 1,
                   })}
                 />

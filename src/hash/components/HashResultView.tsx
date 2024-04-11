@@ -25,7 +25,11 @@ const HashResultView: FunctionComponent<HashResultViewProps> = ({ result, onClea
           {result.hashes
             .sort((a, b) => a.hashType.valueOf() - b.hashType.valueOf()) // ensure that the order is always the same
             .map((hash) => (
-              <HashView title={HashTypeToName[hash.hashType]} hash={hash} />
+              <HashView
+                key={HashTypeToName[hash.hashType]}
+                title={HashTypeToName[hash.hashType]}
+                hash={hash}
+              />
             ))}
         </div>
       </div>

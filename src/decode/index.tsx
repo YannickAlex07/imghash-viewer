@@ -16,12 +16,13 @@ enum State {
 const DecodePage: FunctionComponent = () => {
   const [state, setState] = useState(State.Default)
   const [matrix, setMatrix] = useState<Matrix | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const onSubmit = (data: HashFormData) => {
     // show loading spinner
     setState(State.Loading)
 
-    invoke('decode_hash', {
+    invoke('decode', {
       hash: data.hash,
       width: data.width,
       height: data.height,
@@ -35,9 +36,15 @@ const DecodePage: FunctionComponent = () => {
         setState(State.Matrix)
       })
       .catch((error) => {
-        console.log(error)
-        // hide loading spinner, show error toast and
-        // show form again
+        setError(error as string)
+        setState(State.Default)
+
+        const modal = document.getElementById('errorDialog')
+
+        if (modal) {
+          const dialog = modal as HTMLDialogElement
+          dialog.showModal()
+        }
       })
   }
 
@@ -65,6 +72,23 @@ const DecodePage: FunctionComponent = () => {
 
       {/* Matrix */}
       {state === State.Matrix && <MatrixViewContainer matrix={matrix!} onClear={onClear} />}
+
+      {/* Error Modal */}
+      <dialog id="errorDialog" className="modal">
+        <div className="modal-box">
+          <div className="flex flex-col gap-2">
+            <p className="text-xl font-extrabold">Something Went Wrong</p>
+            <p className="text-lg">{error}</p>
+          </div>
+
+          {/* Actions */}
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }

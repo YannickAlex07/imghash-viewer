@@ -49,25 +49,37 @@ pub async fn hash_image(path: &str, hash_types: Vec<HashType>) -> Result<HashRes
 
         match hash_type {
             HashType::Average => {
-                hash = average_hash(file_path).unwrap();
+                match average_hash(file_path) {
+                    Ok(h) => hash = h,
+                    Err(e) => return Err(e.to_string())
+                }
             },
             HashType::Difference => {
-                hash = difference_hash(file_path).unwrap();
+                match difference_hash(file_path) {
+                    Ok(h) => hash = h,
+                    Err(e) => return Err(e.to_string())
+                }
             },
             HashType::Perceptual => {
-                hash = perceptual_hash(file_path).unwrap();
+                match perceptual_hash(file_path) {
+                    Ok(h) => hash = h,
+                    Err(e) => return Err(e.to_string())
+                }
             },
         }
 
-        Hash {
+        Ok(Hash {
             hash_type,
             hash: hash.encode(),
             matrix: hash.matrix,
-        }
-    }).collect::<Vec<Hash>>();
+        })
+    }).collect::<Result<Vec<Hash>, String>>();
 
-    Ok(HashResult {
-        path: path.to_string(),
-        hashes,
-    })
+    match hashes {
+        Ok(h) => Ok(HashResult {
+            path: path.to_string(),
+            hashes: h,
+        }),
+        Err(s) => Err(s)
+    }
 }
