@@ -6,6 +6,7 @@ import { invoke } from '@tauri-apps/api'
 import { Matrix } from '../models/matrix'
 import Spinner from '../components/Spinner'
 import MatrixViewContainer from './components/MatrixViewContainer'
+import ErrorModal from '../components/ErrorModal'
 
 enum State {
   Default,
@@ -74,21 +75,7 @@ const DecodePage: FunctionComponent = () => {
       {state === State.Matrix && <MatrixViewContainer matrix={matrix!} onClear={onClear} />}
 
       {/* Error Modal */}
-      <dialog id="errorDialog" className="modal">
-        <div className="modal-box">
-          <div className="flex flex-col gap-2">
-            <p className="text-xl font-extrabold">Something Went Wrong</p>
-            <p className="text-lg">{error}</p>
-          </div>
-
-          {/* Actions */}
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+      <ErrorModal id="errorModal" error={error || ''} />
     </div>
   )
 }

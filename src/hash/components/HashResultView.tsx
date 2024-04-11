@@ -1,8 +1,9 @@
-import { FunctionComponent } from 'react'
-import { HashResult } from '../../models/hash_result'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
-import HashView from './HashView'
+import { FunctionComponent } from 'react'
+import XIcon from '../../icons/XIcon'
+import { HashResult } from '../../models/hash_result'
 import { HashTypeToName } from '../../models/hash_type'
+import HashView from './HashView'
 
 export type HashResultViewProps = {
   result: HashResult
@@ -36,21 +37,7 @@ const HashResultView: FunctionComponent<HashResultViewProps> = ({ result, onClea
 
       {/* Clear Button */}
       <button className="btn" onClick={onClear}>
-        <svg
-          className="w-6 h-6"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18 18 6m0 12L6 6"
-          />
-        </svg>
+        <XIcon />
         Clear
       </button>
     </div>

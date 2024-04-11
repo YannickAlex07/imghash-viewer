@@ -7,6 +7,7 @@ import SelectImage from './components/SelectImage'
 import { HashResult } from '../models/hash_result'
 import HashResultView from './components/HashResultView'
 import { HashType } from '../models/hash_type'
+import ErrorModal from '../components/ErrorModal'
 
 enum State {
   Default,
@@ -77,21 +78,7 @@ const HashPage: FunctionComponent = () => {
       {state === State.Result && <HashResultView onClear={onClear} result={result!} />}
 
       {/* Error Modal */}
-      <dialog id="errorDialog" className="modal">
-        <div className="modal-box">
-          <div className="flex flex-col gap-2">
-            <p className="text-xl font-extrabold">Something Went Wrong</p>
-            <p className="text-lg">{error}</p>
-          </div>
-
-          {/* Actions */}
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+      <ErrorModal id="errorModal" error={error || ''} />
     </div>
   )
 }
