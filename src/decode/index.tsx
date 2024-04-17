@@ -75,7 +75,7 @@ const DecodePage: FunctionComponent = () => {
       {state === State.Matrix && <MatrixViewContainer matrix={matrix!} onClear={onClear} />}
 
       {/* Error Modal */}
-      <ErrorModal id="errorModal" error={error || ''} />
+      <ErrorModal id="errorDialog" error={error || ''} />
     </div>
   )
 }

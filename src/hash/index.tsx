@@ -78,7 +78,7 @@ const HashPage: FunctionComponent = () => {
       {state === State.Result && <HashResultView onClear={onClear} result={result!} />}
 
       {/* Error Modal */}
-      <ErrorModal id="errorModal" error={error || ''} />
+      <ErrorModal id="errorDialog" error={error || ''} />
     </div>
   )
 }
