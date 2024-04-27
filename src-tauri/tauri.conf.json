@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "Image Hash Viewer",
+    "productName": "img-hash-viewer",
     "version": "0.1.0"
   },
   "tauri": {
