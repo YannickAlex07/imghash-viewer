@@ -37,49 +37,46 @@ pub async fn hash_image(path: &str, hash_types: Vec<HashType>) -> Result<HashRes
             if !exists {
                 return Err("File does not exist".to_string());
             }
-        },
+        }
         Err(e) => {
             return Err(e.to_string());
         }
     }
 
     // use rayon to compute hashes in parallel
-    let hashes = hash_types.into_par_iter().map(|hash_type| {
-        let hash: ImageHash;
+    let hashes = hash_types
+        .into_par_iter()
+        .map(|hash_type| {
+            let hash: ImageHash;
 
-        match hash_type {
-            HashType::Average => {
-                match average_hash(file_path) {
+            match hash_type {
+                HashType::Average => match average_hash(file_path) {
                     Ok(h) => hash = h,
-                    Err(e) => return Err(e.to_string())
-                }
-            },
-            HashType::Difference => {
-                match difference_hash(file_path) {
+                    Err(e) => return Err(e.to_string()),
+                },
+                HashType::Difference => match difference_hash(file_path) {
                     Ok(h) => hash = h,
-                    Err(e) => return Err(e.to_string())
-                }
-            },
-            HashType::Perceptual => {
-                match perceptual_hash(file_path) {
+                    Err(e) => return Err(e.to_string()),
+                },
+                HashType::Perceptual => match perceptual_hash(file_path) {
                     Ok(h) => hash = h,
-                    Err(e) => return Err(e.to_string())
-                }
-            },
-        }
+                    Err(e) => return Err(e.to_string()),
+                },
+            }
 
-        Ok(Hash {
-            hash_type,
-            hash: hash.encode(),
-            matrix: hash.matrix,
+            Ok(Hash {
+                hash_type,
+                hash: hash.encode(),
+                matrix: hash.matrix,
+            })
         })
-    }).collect::<Result<Vec<Hash>, String>>();
+        .collect::<Result<Vec<Hash>, String>>();
 
     match hashes {
         Ok(h) => Ok(HashResult {
             path: path.to_string(),
             hashes: h,
         }),
-        Err(s) => Err(s)
+        Err(s) => Err(s),
     }
 }

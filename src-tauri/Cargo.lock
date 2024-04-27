@@ -1323,16 +1323,18 @@ dependencies = [
  "num-traits",
  "png",
  "qoi",
+ "rayon",
  "tiff",
 ]
 
 [[package]]
 name = "imghash"
-version = "1.1.1"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18f6f92c2e26de9a743be407617db5533152a3d0224c00f1021a34bacafbb57b"
+checksum = "6caa767a2ed439e9a22792676436ae715a7e2b4b82e68d6c8b1190d81a8e2d5f"
 dependencies = [
  "image",
+ "rayon",
 ]
 
 [[package]]
