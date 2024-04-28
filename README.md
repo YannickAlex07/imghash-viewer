@@ -40,7 +40,7 @@ Here is a map which installer to use for which platform:
 | MacOS (Apple Silicon) | `img-hash-viewer_X.X.X_aarch64.dmg`                                                      |
 | MacOS (Intel)         | `img-hash-viewer_X.X.X_x64.dmg`                                                          |
 | Windows               | <p>`img-hash-viewer_X.X.X_x64-setup.exe`</p><p>`img-hash-viewer_X.X.X_x64_en-US.msi`</p> |
-| Linux                 | <p>`img-hash-viewer_0.1.0_amd64.AppImage`</p><p>`img-hash-viewer_0.1.0_amd64.deb`</p>    |
+| Linux                 | <p>`img-hash-viewer_X.X.X_amd64.AppImage`</p><p>`img-hash-viewer_X.X.X_amd64.deb`</p>    |
 
 Download the appropiate installer from the latest release and follow the instructions of the installer.
 
